@@ -1,8 +1,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ .Site.Title }} -- {{ .Site.Params.tagline }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Open Graph -->
+<meta property="og:title"       content="{{ .Title }}">
+<meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:type"        content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:url"         content="{{ .Permalink }}">
+<meta property="og:site_name"   content="{{ .Site.Title }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="{{ .Title }}">
+<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
 <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}">
+
 {{ with .OutputFormats.Get "RSS" }}
 <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
+{{ end }}
+
+{{ if .Params.rating }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "name": {{ .Title | jsonify }},
+  "reviewBody": {{ .Summary | jsonify }},
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "{{ .Params.rating }}",
+    "bestRating": "10",
+    "worstRating": "1"
+  },
+  "author": { "@type": "Organization", "name": {{ .Site.Title | jsonify }} },
+  "itemReviewed": {
+    "@type": "Product",
+    "name": {{ (default .Title .Params.product_name) | jsonify }}
+  }
+}
+</script>
 {{ end }}
