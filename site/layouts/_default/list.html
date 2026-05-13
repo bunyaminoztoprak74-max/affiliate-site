@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="post-list">
+  <h1>{{ .Title }}</h1>
+  {{ range .Pages }}
+  <article class="post-card">
+    <div class="post-card__meta">
+      <span class="post-card__category">{{ .Params.categories }}</span>
+      {{ with .Params.rating }}
+      <span class="rating">{{ . }}/10</span>
+      {{ end }}
+    </div>
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <p>{{ .Summary | truncate 160 }}</p>
+    <div class="post-card__footer">
+      <time>{{ .Date.Format "January 2, 2006" }}</time>
+      <a href="{{ .Permalink }}" class="read-more">Read Review →</a>
+    </div>
+  </article>
+  {{ end }}
+</div>
+{{ end }}
