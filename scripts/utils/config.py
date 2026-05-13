@@ -16,8 +16,9 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 # GitHub
 # ---------------------------------------------------------------------------
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
-GITHUB_REPO = os.environ.get("GITHUB_REPO", "")
-GITHUB_BRANCH = os.environ.get("GITHUB_BRANCH", "main")
+# Fall back to GitHub Actions built-ins when running in CI
+GITHUB_REPO   = os.environ.get("GITHUB_REPO") or os.environ.get("GITHUB_REPOSITORY", "")
+GITHUB_BRANCH = os.environ.get("GITHUB_BRANCH") or os.environ.get("GITHUB_REF_NAME", "main")
 
 # ---------------------------------------------------------------------------
 # Amazon Product Advertising API 5.0
