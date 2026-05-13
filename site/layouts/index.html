@@ -1,0 +1,31 @@
+{{ define "main" }}
+<section class="hero">
+  <h1>Honest Reviews. Better Decisions.</h1>
+  <p>In-depth product reviews and top picks — no fluff, just the facts you need before you buy.</p>
+</section>
+
+<section class="reviews-grid">
+  <h2 class="section-title">Latest Reviews</h2>
+  {{ $pages := .Site.RegularPages.ByDate.Reverse }}
+  {{ if $pages }}
+    {{ range $pages }}
+    <article class="post-card">
+      <div class="post-card__meta">
+        <span class="post-card__category">{{ .Params.categories }}</span>
+        {{ with .Params.rating }}
+        <span class="rating">{{ . }}/10</span>
+        {{ end }}
+      </div>
+      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Summary | truncate 160 }}</p>
+      <div class="post-card__footer">
+        <time>{{ .Date.Format "January 2, 2006" }}</time>
+        <a href="{{ .Permalink }}" class="read-more">Read Review →</a>
+      </div>
+    </article>
+    {{ end }}
+  {{ else }}
+    <p class="no-posts">No reviews yet — check back soon.</p>
+  {{ end }}
+</section>
+{{ end }}
