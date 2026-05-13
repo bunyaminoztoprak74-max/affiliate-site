@@ -7,6 +7,7 @@ tags: ["Instant Pot Duo", "pressure cooker", "slow cooker", "multicooker", "home
 affiliate_link: "https://www.amazon.com/s?k=Instant+Pot+Duo+7-in-1&tag=affiliater07c-20"
 product_name: "Instant Pot Duo 7-in-1"
 rating: 9
+image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80&auto=format&fit=crop"
 description: "Discover the Instant Pot Duo 7-in-1, a multifunctional pressure cooker, slow cooker, and more, with its key features, pros, and cons."
 ---
 
