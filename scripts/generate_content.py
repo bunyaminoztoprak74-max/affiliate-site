@@ -72,6 +72,10 @@ The content must include these sections in order:
     data["product_name"] = product_name
     data["affiliate_link"] = affiliate_link
     data["categories"] = category
+    # Consistent placeholder image keyed on product slug
+    from slugify import slugify as _sl
+    _slug = _sl(product_name)
+    data["image"] = f"https://picsum.photos/seed/{_slug}/800/450"
     return data
 
 
@@ -91,6 +95,7 @@ def save_post(data: dict, content_type: str = "reviews") -> Path:
         affiliate_link=data["affiliate_link"],
         product_name=data["product_name"],
         rating=data["rating"],
+        image=data.get("image", ""),
         meta_description=data["meta_description"],
         content=data["content"],
     )
