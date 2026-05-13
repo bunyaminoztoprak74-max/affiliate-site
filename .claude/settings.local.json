@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\affiliate-agent\" -Recurse | Where-Object { !$_.PSIsContainer } | Select-Object -ExpandProperty FullName)",
+      "PowerShell(python -c \"import python_slugify; print\\('ok'\\)\" 2>&1; python -m pip install python-slugify 2>&1)",
+      "PowerShell(pip install *)"
+    ]
+  }
+}
