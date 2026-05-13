@@ -32,7 +32,9 @@
   {{ else if ge $r 6 }}{{ $rClass = "rating rating-mid" }}
   {{ else if gt $r 0 }}{{ $rClass = "rating rating-low" }}{{ end }}
   <article class="post-card">
-    <div class="post-card__image">&#9733;</div>
+      <div class="post-card__image">
+    {{ with .Params.image }}<img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+  </div>
     <div class="post-card__body">
       <div class="post-card__meta">
         <span class="post-card__category">{{ .Params.categories }}</span>
