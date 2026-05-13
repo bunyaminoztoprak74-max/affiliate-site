@@ -1,21 +1,41 @@
 {{ define "main" }}
-<div class="post-list">
+<div class="page-header">
   <h1>{{ .Title }}</h1>
-  {{ range .Pages }}
+  <p>{{ with .Params.description }}{{ . }}{{ else }}Browse all reviews in this section.{{ end }}</p>
+</div>
+
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ if $pages }}
+<div class="section-header" style="margin-top:2rem">
+  <h2>{{ len $pages }} {{ if eq (len $pages) 1 }}Review{{ else }}Reviews{{ end }}</h2>
+</div>
+<div class="cards-grid">
+  {{ range $pages }}
+  {{ $r := .Params.rating | default 0 }}
+  {{ $rClass := "rating" }}
+  {{ if ge $r 8 }}{{ $rClass = "rating rating-high" }}
+  {{ else if ge $r 6 }}{{ $rClass = "rating rating-mid" }}
+  {{ else if gt $r 0 }}{{ $rClass = "rating rating-low" }}{{ end }}
   <article class="post-card">
-    <div class="post-card__meta">
-      <span class="post-card__category">{{ .Params.categories }}</span>
-      {{ with .Params.rating }}
-      <span class="rating">{{ . }}/10</span>
-      {{ end }}
-    </div>
-    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-    <p>{{ .Summary | truncate 160 }}</p>
-    <div class="post-card__footer">
-      <time>{{ .Date.Format "January 2, 2006" }}</time>
-      <a href="{{ .Permalink }}" class="read-more">Read Review →</a>
+    <div class="post-card__image">&#9733;</div>
+    <div class="post-card__body">
+      <div class="post-card__meta">
+        <span class="post-card__category">{{ .Params.categories }}</span>
+        {{ with .Params.rating }}<span class="{{ $rClass }}">{{ . }}/10</span>{{ end }}
+      </div>
+      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Summary | truncate 145 }}</p>
+      <div class="post-card__footer">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <a href="{{ .Permalink }}" class="read-more">Read Review</a>
+      </div>
     </div>
   </article>
   {{ end }}
 </div>
+{{ else }}
+<div class="container">
+  <p class="no-posts">No reviews yet in this section.</p>
+</div>
+{{ end }}
 {{ end }}
