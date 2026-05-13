@@ -12,9 +12,9 @@ from github import Github, GithubException
 
 load_dotenv()
 
-GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
-GITHUB_REPO = os.environ["GITHUB_REPO"]          # "username/repo-name"
-GITHUB_BRANCH = os.environ.get("GITHUB_BRANCH", "main")
+GITHUB_TOKEN  = os.environ["GITHUB_TOKEN"]
+GITHUB_REPO   = os.environ.get("GITHUB_REPO") or os.environ.get("GITHUB_REPOSITORY", "")
+GITHUB_BRANCH = os.environ.get("GITHUB_BRANCH") or os.environ.get("GITHUB_REF_NAME", "main")
 
 SITE_DIR = Path(__file__).parent.parent / "site"
 
