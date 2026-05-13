@@ -7,6 +7,7 @@ tags: ["Garmin Forerunner 255", "GPS running watch", "fitness tracker", "smartwa
 affiliate_link: "https://www.amazon.com/s?k=Garmin+Forerunner+255&tag=affiliater07c-20"
 product_name: "Garmin Forerunner 255"
 rating: 8
+image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80&auto=format&fit=crop"
 description: "Discover the Garmin Forerunner 255, a GPS running watch with advanced features like multi-band GPS, HRV status, and music support, in our in-depth review"
 ---
 
