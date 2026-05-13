@@ -1,33 +1,34 @@
-name: Build & Deploy Hugo Site
+name: Hugo Build Check
 
 on:
   push:
     branches: [main]
     paths:
       - "site/**"
+      - "vercel.json"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  build-deploy:
+  build:
+    name: Verify Hugo Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "latest"
-          extended: true
+      - name: Install Hugo Extended
+        run: |
+          curl -fsSL https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_extended_0.161.1_linux-amd64.tar.gz \
+            | tar -xz -C /usr/local/bin
 
       - name: Build
         run: hugo --minify --source site
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site/public
+      - name: Report page count
+        run: |
+          pages=$(find site/public -name "*.html" | wc -l)
+          echo "Built $pages HTML pages"
+          if [ "$pages" -lt 5 ]; then
+            echo "ERROR: too few pages built ($pages)" && exit 1
+          fi
