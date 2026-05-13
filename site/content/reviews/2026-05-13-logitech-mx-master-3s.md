@@ -7,7 +7,7 @@ tags: ["Logitech MX Master 3S", "wireless mouse", "ergonomic design", "silent cl
 affiliate_link: "https://www.amazon.com/s?k=Logitech+MX+Master+3S&tag=affiliater07c-20"
 product_name: "Logitech MX Master 3S"
 rating: 9
-image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&q=80&auto=format&fit=crop"
+image: "/images/2026-05-13-logitech-mx-master-3s.jpg"
 description: "Discover the Logitech MX Master 3S, a premium mouse with silent clicks, ergonomic design, and 70-day battery life, perfect for professionals and gamers alike."
 ---
 
