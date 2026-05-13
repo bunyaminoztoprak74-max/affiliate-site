@@ -1,0 +1,30 @@
+[
+  {
+    "id": "xiaomi-redmi-note-13-pro",
+    "name": "Xiaomi Redmi Note 13 Pro",
+    "affiliate_link": "https://amzn.to/example1",
+    "affiliate_network": "amazon",
+    "asin": "",
+    "category": "smartphones",
+    "type": "reviews",
+    "price": "",
+    "gravity_score": null,
+    "context": "Mid-range, AMOLED display, 200MP camera, 5000mAh battery, 67W fast charging",
+    "tags": [],
+    "last_updated": "2026-05-13"
+  },
+  {
+    "id": "logitech-mx-master-3s",
+    "name": "Logitech MX Master 3S",
+    "affiliate_link": "https://amzn.to/example2",
+    "affiliate_network": "amazon",
+    "asin": "",
+    "category": "computer-accessories",
+    "type": "reviews",
+    "price": "",
+    "gravity_score": null,
+    "context": "Silent clicks, ergonomic design, multi-device support, MagSpeed scroll wheel, 70-day battery",
+    "tags": [],
+    "last_updated": "2026-05-13"
+  }
+]
