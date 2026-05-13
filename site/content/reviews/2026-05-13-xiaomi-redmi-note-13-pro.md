@@ -7,7 +7,7 @@ tags: ["Xiaomi Redmi Note 13 Pro", "mid-range smartphones", "AMOLED display", "2
 affiliate_link: "https://www.amazon.com/s?k=Xiaomi+Redmi+Note+13+Pro&tag=affiliater07c-20"
 product_name: "Xiaomi Redmi Note 13 Pro"
 rating: 8
-image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&q=80&auto=format&fit=crop"
+image: "/images/2026-05-13-xiaomi-redmi-note-13-pro.jpg"
 description: "Discover the Xiaomi Redmi Note 13 Pro, a mid-range smartphone with impressive features like an AMOLED display, 200MP camera, and 5000mAh battery"
 ---
 
