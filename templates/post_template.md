@@ -7,6 +7,7 @@ tags: [{tags}]
 affiliate_link: "{affiliate_link}"
 product_name: "{product_name}"
 rating: {rating}
+image: "{image}"
 description: "{meta_description}"
 ---
 
