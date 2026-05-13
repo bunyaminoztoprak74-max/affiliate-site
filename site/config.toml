@@ -1,0 +1,23 @@
+baseURL = "https://affiliate-site-jade-nine.vercel.app/"
+languageCode = "en-US"
+title = "Affiliate Review Hub"
+theme = ""
+
+[params]
+  description = "Honest product reviews and top picks for every budget"
+  author = "Affiliate Hub"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+
+paginate = 10
