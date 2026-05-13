@@ -1,4 +1,30 @@
 <footer class="site-footer">
-  <p>This site contains affiliate links. We may earn a commission on qualifying purchases at no extra cost to you.</p>
-  <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">{{ .Site.Title }}</p>
+      <p class="footer-tagline">{{ .Site.Params.description }}<br>
+        Independent reviews. No paid placements.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Browse</h4>
+      <ul class="footer-links">
+        <li><a href="{{ "/reviews/" | relURL }}">All Reviews</a></li>
+        <li><a href="{{ "/categories/smartphones/" | relURL }}">Smartphones</a></li>
+        <li><a href="{{ "/categories/audio/" | relURL }}">Audio</a></li>
+        <li><a href="{{ "/categories/fitness/" | relURL }}">Fitness</a></li>
+        <li><a href="{{ "/categories/monitors/" | relURL }}">Monitors</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Affiliate Disclosure</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>This site contains affiliate links. We may earn a commission on qualifying purchases at no extra cost to you.</p>
+    <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+  </div>
 </footer>
