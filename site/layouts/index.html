@@ -1,31 +1,56 @@
 {{ define "main" }}
 <section class="hero">
-  <h1>Honest Reviews. Better Decisions.</h1>
-  <p>In-depth product reviews and top picks — no fluff, just the facts you need before you buy.</p>
+  <h1>Honest Reviews.<br><em>Better Decisions.</em></h1>
+  <p>In-depth product breakdowns with real pros and cons -- no fluff, no paid placements.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>{{ len .Site.RegularPages }}</strong>
+      <span>Reviews</span>
+    </div>
+    <div class="hero-stat">
+      <strong>100%</strong>
+      <span>Independent</span>
+    </div>
+    <div class="hero-stat">
+      <strong>0</strong>
+      <span>Paid Posts</span>
+    </div>
+  </div>
 </section>
 
-<section class="reviews-grid">
-  <h2 class="section-title">Latest Reviews</h2>
-  {{ $pages := .Site.RegularPages.ByDate.Reverse }}
-  {{ if $pages }}
-    {{ range $pages }}
-    <article class="post-card">
+{{ $pages := .Site.RegularPages.ByDate.Reverse }}
+{{ if $pages }}
+<div class="section-header">
+  <h2>Latest Reviews</h2>
+  <a href="{{ "/reviews/" | relURL }}">View all</a>
+</div>
+<div class="cards-grid">
+  {{ range $pages }}
+  {{ $r := .Params.rating | default 0 }}
+  {{ $rClass := "rating" }}
+  {{ if ge $r 8 }}{{ $rClass = "rating rating-high" }}
+  {{ else if ge $r 6 }}{{ $rClass = "rating rating-mid" }}
+  {{ else if gt $r 0 }}{{ $rClass = "rating rating-low" }}{{ end }}
+  <article class="post-card">
+    <div class="post-card__image">&#9733;</div>
+    <div class="post-card__body">
       <div class="post-card__meta">
         <span class="post-card__category">{{ .Params.categories }}</span>
-        {{ with .Params.rating }}
-        <span class="rating">{{ . }}/10</span>
-        {{ end }}
+        {{ with .Params.rating }}<span class="{{ $rClass }}">{{ . }}/10</span>{{ end }}
       </div>
       <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-      <p>{{ .Summary | truncate 160 }}</p>
+      <p>{{ .Summary | truncate 145 }}</p>
       <div class="post-card__footer">
-        <time>{{ .Date.Format "January 2, 2006" }}</time>
-        <a href="{{ .Permalink }}" class="read-more">Read Review →</a>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <a href="{{ .Permalink }}" class="read-more">Read Review</a>
       </div>
-    </article>
-    {{ end }}
-  {{ else }}
-    <p class="no-posts">No reviews yet — check back soon.</p>
+    </div>
+  </article>
   {{ end }}
-</section>
+</div>
+{{ else }}
+<div class="container">
+  <p class="no-posts">No reviews yet -- check back soon.</p>
+</div>
+{{ end }}
 {{ end }}
