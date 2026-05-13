@@ -1,7 +1,7 @@
 baseURL = "https://affiliate-site-jade-nine.vercel.app/"
-languageCode = "en-US"
+locale = "en-US"
 title = "Affiliate Review Hub"
-theme = ""
+buildFuture = true
 
 [params]
   description = "Honest product reviews and top picks for every budget"
@@ -20,4 +20,5 @@ theme = ""
   home = ["HTML", "RSS"]
   page = ["HTML"]
 
-paginate = 10
+[pagination]
+  pagerSize = 10
