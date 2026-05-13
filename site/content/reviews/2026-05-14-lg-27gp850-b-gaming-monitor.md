@@ -7,7 +7,7 @@ tags: ["LG 27GP850-B", "Gaming Monitor", "Nano IPS", "165Hz Refresh Rate", "G-Sy
 affiliate_link: "https://www.amazon.com/s?k=LG+27GP850-B+Gaming+Monitor&tag=affiliater07c-20"
 product_name: "LG 27GP850-B Gaming Monitor"
 rating: 9
-image: "https://picsum.photos/seed/2026-05-14-lg-27gp850-b-gaming-monitor/800/450"
+image: "/images/2026-05-14-lg-27gp850-b-gaming-monitor.jpg"
 description: "Discover the LG 27GP850-B Gaming Monitor with Nano IPS, 165Hz refresh rate, and NVIDIA G-Sync compatibility, perfect for gamers and professionals seeking high-performance displays"
 ---
 
