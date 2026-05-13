@@ -1,19 +1,40 @@
 {{ define "main" }}
-<article class="post">
-  <header class="post-header">
+{{ $r := .Params.rating | default 0 }}
+{{ $rClass := "rating" }}
+{{ if ge $r 8 }}{{ $rClass = "rating rating-high" }}
+{{ else if ge $r 6 }}{{ $rClass = "rating rating-mid" }}
+{{ else if gt $r 0 }}{{ $rClass = "rating rating-low" }}{{ end }}
+
+<div class="article-hero">
+  <div class="container">
+    <p class="breadcrumb">
+      <a href="{{ "/" | relURL }}">Home</a>
+      <span>/</span>
+      <a href="{{ "/reviews/" | relURL }}">Reviews</a>
+      <span>/</span>
+      {{ .Title }}
+    </p>
     <h1>{{ .Title }}</h1>
-    <div class="post-meta">
-      <time>{{ .Date.Format "02 January 2006" }}</time>
-      {{ with .Params.rating }}
-      <span class="rating">Rating: {{ . }}/10</span>
-      {{ end }}
+    <div class="article-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .Params.categories }}<span>{{ . }}</span>{{ end }}
+      {{ with .Params.rating }}<span class="{{ $rClass }}">{{ . }}/10</span>{{ end }}
     </div>
-  </header>
+  </div>
+</div>
+
+<div class="article-body">
+  {{ with .Params.description }}
+  <div class="quick-summary">
+    <h3>Quick Take</h3>
+    <p>{{ . }}</p>
+  </div>
+  {{ end }}
 
   {{ with .Params.affiliate_link }}
   <div class="affiliate-cta">
     <a href="{{ . }}" target="_blank" rel="nofollow sponsored" class="btn-cta">
-      Get the Best Price
+      Check Best Price on Amazon
     </a>
   </div>
   {{ end }}
@@ -23,11 +44,11 @@
   </div>
 
   {{ with .Params.affiliate_link }}
-  <div class="affiliate-cta affiliate-cta--bottom">
+  <div class="affiliate-cta" style="margin-top:2.5rem">
     <a href="{{ . }}" target="_blank" rel="nofollow sponsored" class="btn-cta">
-      Check It Out &amp; Buy Now
+      Buy Now on Amazon
     </a>
   </div>
   {{ end }}
-</article>
+</div>
 {{ end }}
