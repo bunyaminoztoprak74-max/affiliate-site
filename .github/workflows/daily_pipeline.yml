@@ -13,6 +13,11 @@ on:
         type: choice
         options: [full, morning, midday, evening, weekly]
 
+# GITHUB_REPOSITORY and GITHUB_REF_NAME are GitHub built-ins; scripts read
+# those automatically, so no custom GITHUB_REPO / GITHUB_BRANCH secret needed.
+permissions:
+  contents: write
+
 env:
   PYTHON_VERSION: '3.12'
 
@@ -33,21 +38,19 @@ jobs:
       - name: Research trending products
         run: python scripts/pipeline/morning_research.py
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          GITHUB_BRANCH: ${{ secrets.GITHUB_BRANCH }}
-          AMAZON_ACCESS_KEY: ${{ secrets.AMAZON_ACCESS_KEY }}
-          AMAZON_SECRET_KEY: ${{ secrets.AMAZON_SECRET_KEY }}
-          AMAZON_ASSOCIATE_TAG: ${{ secrets.AMAZON_ASSOCIATE_TAG }}
-          CLICKBANK_DEV_API_KEY: ${{ secrets.CLICKBANK_DEV_API_KEY }}
-          CLICKBANK_CLERK_API_KEY: ${{ secrets.CLICKBANK_CLERK_API_KEY }}
-          CJ_API_TOKEN: ${{ secrets.CJ_API_TOKEN }}
-          CJ_WEBSITE_ID: ${{ secrets.CJ_WEBSITE_ID }}
-          SHAREASALE_API_TOKEN: ${{ secrets.SHAREASALE_API_TOKEN }}
-          SHAREASALE_API_SECRET: ${{ secrets.SHAREASALE_API_SECRET }}
-          SHAREASALE_AFFILIATE_ID: ${{ secrets.SHAREASALE_AFFILIATE_ID }}
-          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          GROQ_API_KEY:             ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN:             ${{ secrets.GITHUB_TOKEN }}
+          AMAZON_ACCESS_KEY:        ${{ secrets.AMAZON_ACCESS_KEY }}
+          AMAZON_SECRET_KEY:        ${{ secrets.AMAZON_SECRET_KEY }}
+          AMAZON_ASSOCIATE_TAG:     ${{ secrets.AMAZON_ASSOCIATE_TAG }}
+          CLICKBANK_DEV_API_KEY:    ${{ secrets.CLICKBANK_DEV_API_KEY }}
+          CLICKBANK_CLERK_API_KEY:  ${{ secrets.CLICKBANK_CLERK_API_KEY }}
+          CJ_API_TOKEN:             ${{ secrets.CJ_API_TOKEN }}
+          CJ_WEBSITE_ID:            ${{ secrets.CJ_WEBSITE_ID }}
+          SHAREASALE_API_TOKEN:     ${{ secrets.SHAREASALE_API_TOKEN }}
+          SHAREASALE_API_SECRET:    ${{ secrets.SHAREASALE_API_SECRET }}
+          SHAREASALE_AFFILIATE_ID:  ${{ secrets.SHAREASALE_AFFILIATE_ID }}
+          SITE_BASE_URL:            ${{ secrets.SITE_BASE_URL }}
 
   midday-generate:
     name: Midday — Content Generation
@@ -69,11 +72,9 @@ jobs:
       - name: Generate articles and push to site
         run: python scripts/pipeline/midday_generate.py
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          GITHUB_BRANCH: ${{ secrets.GITHUB_BRANCH }}
-          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          GROQ_API_KEY:   ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+          SITE_BASE_URL:  ${{ secrets.SITE_BASE_URL }}
 
   evening-social:
     name: Evening — Social Media
@@ -95,21 +96,19 @@ jobs:
       - name: Post to social media and track metrics
         run: python scripts/pipeline/evening_social.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          GITHUB_BRANCH: ${{ secrets.GITHUB_BRANCH }}
-          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
-          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
-          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
-          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          TWITTER_API_KEY:        ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET:     ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN:   ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET:  ${{ secrets.TWITTER_ACCESS_SECRET }}
+          TWITTER_BEARER_TOKEN:   ${{ secrets.TWITTER_BEARER_TOKEN }}
+          REDDIT_CLIENT_ID:       ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET:   ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME:        ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD:        ${{ secrets.REDDIT_PASSWORD }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_AD_ACCOUNT_ID: ${{ secrets.PINTEREST_AD_ACCOUNT_ID }}
-          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          SITE_BASE_URL:          ${{ secrets.SITE_BASE_URL }}
 
   weekly-analysis:
     name: Weekly — Performance Analysis
@@ -129,14 +128,12 @@ jobs:
       - name: Run weekly analysis
         run: python scripts/pipeline/weekly_analyze.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          GITHUB_BRANCH: ${{ secrets.GITHUB_BRANCH }}
-          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
-          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          TWITTER_BEARER_TOKEN:   ${{ secrets.TWITTER_BEARER_TOKEN }}
+          REDDIT_CLIENT_ID:       ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET:   ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME:        ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD:        ${{ secrets.REDDIT_PASSWORD }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_AD_ACCOUNT_ID: ${{ secrets.PINTEREST_AD_ACCOUNT_ID }}
-          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          SITE_BASE_URL:          ${{ secrets.SITE_BASE_URL }}
