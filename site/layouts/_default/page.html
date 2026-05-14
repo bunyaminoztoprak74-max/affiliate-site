@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="legal-page">
+
+  <div class="legal-header">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="{{ "/" | relURL }}">Home</a>
+        <span>/</span>
+        {{ .Title }}
+      </p>
+      <h1>{{ .Title }}</h1>
+      <p class="legal-updated">
+        Last updated:
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      </p>
+    </div>
+  </div>
+
+  <div class="legal-body">
+    <div class="legal-content">
+      {{ .Content }}
+    </div>
+  </div>
+
+</div>
+{{ end }}
