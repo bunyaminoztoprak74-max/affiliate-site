@@ -53,7 +53,12 @@ SHAREASALE_AFFILIATE_ID = os.environ.get("SHAREASALE_AFFILIATE_ID", "")
 TWITTER_API_KEY = os.environ.get("TWITTER_API_KEY", "")
 TWITTER_API_SECRET = os.environ.get("TWITTER_API_SECRET", "")
 TWITTER_ACCESS_TOKEN = os.environ.get("TWITTER_ACCESS_TOKEN", "")
-TWITTER_ACCESS_SECRET = os.environ.get("TWITTER_ACCESS_SECRET", "")
+# Accept both naming conventions (GitHub secret is TWITTER_ACCESS_TOKEN_SECRET)
+TWITTER_ACCESS_SECRET = (
+    os.environ.get("TWITTER_ACCESS_SECRET")
+    or os.environ.get("TWITTER_ACCESS_TOKEN_SECRET", "")
+)
+# Bearer Token is optional — only needed for read-only API calls, not for posting
 TWITTER_BEARER_TOKEN = os.environ.get("TWITTER_BEARER_TOKEN", "")
 
 # ---------------------------------------------------------------------------
