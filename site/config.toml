@@ -4,6 +4,9 @@ title = "Affiliate Review Hub"
 buildFuture = true
 
 [params]
+  googleAnalyticsID = ""
+  clarityProjectID  = ""
+  tagline = "Honest product reviews for smarter buying decisions"
   description = "Honest product reviews and top picks for every budget"
   author = "Affiliate Hub"
 
