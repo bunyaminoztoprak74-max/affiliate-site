@@ -40,14 +40,14 @@ class TwitterPoster:
             "TWITTER_API_SECRET",
             "TWITTER_ACCESS_TOKEN",
             "TWITTER_ACCESS_SECRET",
-            "TWITTER_BEARER_TOKEN",
         ):
             print("[WARN] Twitter credentials not fully configured — Twitter posting disabled.")
             return
 
         try:
             self.client = tweepy.Client(
-                bearer_token=TWITTER_BEARER_TOKEN,
+                # Bearer token is optional — OAuth 1.0a credentials suffice for posting
+                bearer_token=TWITTER_BEARER_TOKEN or None,
                 consumer_key=TWITTER_API_KEY,
                 consumer_secret=TWITTER_API_SECRET,
                 access_token=TWITTER_ACCESS_TOKEN,
