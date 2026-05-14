@@ -1,0 +1,95 @@
+{{/*
+  analytics_events.html
+  Loaded just before </body>. Tracks affiliate clicks, scroll depth,
+  and outbound links. Works with both GA4 and Clarity when active.
+*/}}
+<script>
+(function() {
+  'use strict';
+
+  /* ---- helpers --------------------------------------------------------- */
+  function gaEvent(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params);
+  }
+  function clarityEvent(name) {
+    if (typeof clarity === 'function') clarity('event', name);
+  }
+
+  /* ---- affiliate link click tracking ----------------------------------- */
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+
+    var isAffiliate = (
+      link.closest('.btn-cta') ||
+      link.closest('.affiliate-cta') ||
+      (link.rel && link.rel.indexOf('sponsored') !== -1)
+    );
+
+    if (isAffiliate) {
+      gaEvent('affiliate_click', {
+        event_category: 'Affiliate',
+        event_label:    document.title,
+        link_url:       link.href,
+        value:          1
+      });
+      clarityEvent('affiliate_click');
+    }
+
+    /* outbound link tracking */
+    if (link.hostname && link.hostname !== window.location.hostname) {
+      gaEvent('outbound_click', {
+        event_category: 'Outbound',
+        event_label:    link.href
+      });
+    }
+  });
+
+  /* ---- scroll depth tracking ------------------------------------------- */
+  var depthsFired = {};
+  var depths = [25, 50, 75, 90];
+
+  function getScrollPct() {
+    var el  = document.documentElement;
+    var top = window.scrollY || window.pageYOffset || 0;
+    var max = el.scrollHeight - el.clientHeight;
+    return max > 0 ? Math.round((top / max) * 100) : 100;
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var pct = getScrollPct();
+      depths.forEach(function(d) {
+        if (pct >= d && !depthsFired[d]) {
+          depthsFired[d] = true;
+          gaEvent('scroll_depth', {
+            event_category: 'Engagement',
+            event_label:    d + '%',
+            value:          d,
+            page_title:     document.title
+          });
+          if (d >= 75) clarityEvent('deep_scroll');
+        }
+      });
+      ticking = false;
+    });
+  }, { passive: true });
+
+  /* ---- time on page ---------------------------------------------------- */
+  var startTime = Date.now();
+  window.addEventListener('beforeunload', function() {
+    var seconds = Math.round((Date.now() - startTime) / 1000);
+    if (seconds > 5) {
+      gaEvent('time_on_page', {
+        event_category: 'Engagement',
+        value:          seconds,
+        page_title:     document.title
+      });
+    }
+  });
+
+})();
+</script>
