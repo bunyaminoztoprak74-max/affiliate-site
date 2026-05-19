@@ -7,6 +7,9 @@
 {{ $gaID      := site.Params.googleAnalyticsID | default "" }}
 {{ $clarityID := site.Params.clarityProjectID  | default "" }}
 
+<!-- Vercel Web Analytics -->
+<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+
 {{ with $gaID }}
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
