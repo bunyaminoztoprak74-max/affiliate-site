@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-gray-800 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  /* Smooth anchor scrolling with header offset */
+  [id] {
+    scroll-margin-top: 88px;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-12 md:py-20;
+  }
+
+  /* Affiliate link disclosure underline */
+  a[rel*="sponsored"] {
+    @apply no-underline;
+  }
+
+  /* Prose overrides for MDX content */
+  .prose-affiliate h2 {
+    @apply text-2xl font-bold mt-10 mb-4 scroll-mt-24;
+  }
+  .prose-affiliate h3 {
+    @apply text-xl font-semibold mt-8 mb-3 scroll-mt-24;
+  }
+  .prose-affiliate p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose-affiliate ul {
+    @apply list-disc list-inside space-y-1 mb-4;
+  }
+  .prose-affiliate ol {
+    @apply list-decimal list-inside space-y-1 mb-4;
+  }
+
+  /* Spec table */
+  .spec-table td:first-child {
+    @apply font-medium text-gray-600;
+  }
+
+  /* Score badge */
+  .score-badge {
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full font-bold text-lg;
+  }
+  .score-badge.excellent { @apply bg-green-100 text-green-800; }
+  .score-badge.great { @apply bg-brand-100 text-brand-800; }
+  .score-badge.good { @apply bg-yellow-100 text-yellow-800; }
+  .score-badge.fair { @apply bg-orange-100 text-orange-800; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .animate-fade-in { animation: fadeIn 0.4s ease-in-out; }
+  .animate-slide-up { animation: slideUp 0.35s ease-out; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
